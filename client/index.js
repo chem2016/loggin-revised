@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 import {Provider, connect} from 'react-redux'
-import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom'
+import {HashRouter as Router, Route, Switch, Redirect} from 'react-router-dom'
 import store from './store'
 import Login from './login'
 import UserPage from './user-page'
@@ -14,7 +14,10 @@ class _Main extends Component {
 
   render () {
     const { isLoggedIn } = this.props;
+    console.log('in index.js isLoggedIn: ', isLoggedIn)
+    // why when we move the router to here works not in the ReactDom.render
     return (
+      <Router> 
       <Switch>
         {
           isLoggedIn && (<Route path='/home' component={UserPage} />)
@@ -26,6 +29,7 @@ class _Main extends Component {
         }
         <Redirect to='/home' />
       </Switch>
+      </Router>
     )
   }
 };
@@ -40,9 +44,7 @@ const Main = connect(mapStateToProps)(_Main);
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
       <Main />
-    </Router>
   </Provider>,
   document.getElementById('app')
 )

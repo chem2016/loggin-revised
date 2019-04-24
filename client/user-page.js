@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 
 const UserPage = () => {
-
+  console.log('coming in userPage')
   return (
     <div className='h100 w100 flex column align-items-center justify-center'>
       <div className='flex'>
